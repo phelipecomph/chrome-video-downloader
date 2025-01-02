@@ -1,0 +1,13 @@
+{
+    "name": "chrome-video-downloader",
+    "version": "1.0.0",
+    "description": "Extensão do Chrome para baixar vídeos.",
+    "main": "background.js",
+    "scripts": {
+      "start": "echo 'Nada para iniciar ainda!'"
+    },
+    "author": "phelipecomph",
+    "license": "MIT",
+    "dependencies": {}
+  }
+  
