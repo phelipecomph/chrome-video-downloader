@@ -1,12 +1,31 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video Downloader</title>
-</head>
-<body>
-    <h1>Video Downloader</h1>
-    <p>Extensão para baixar vídeos de sites.</p>
-</body>
-</html>
+    <head>
+        <title>Video Downloader</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                padding: 10px;
+            }
+            ul {
+                list-style-type: none;
+                padding: 0;
+            }
+            li {
+                margin: 5px 0;
+            }
+            a {
+                text-decoration: none;
+                color: blue;
+            }
+            a:hover {
+                text-decoration: underline;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Videos encontrados</h1>
+        <ul id="video-list"></ul>
+        <script src="popup.js"></script>
+    </body>
+    </html>

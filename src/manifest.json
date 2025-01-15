@@ -3,15 +3,22 @@
     "name": "Video Downloader",
     "version": "1.0",
     "description": "Extensão para baixar vídeos de sites.",
-    "permissions": ["activeTab", "scripting"],
-    "host_permissions": ["<all_urls>"],
+    "permissions": [
+        "activeTab",
+        "scripting",
+        "downloads",
+        "storage",
+        "webRequest"
+    ],
+    "host_permissions": ["<all_urls>", "https://academy.fluency.io/*"],
     "background": {
         "service_worker": "background.js"
     },
     "content_scripts": [
         {
             "matches": ["<all_urls>"],
-            "js": ["content.js"]
+            "js": ["content.js"],
+            "run_at": "document_idle"
         }
     ],
     "action": {
