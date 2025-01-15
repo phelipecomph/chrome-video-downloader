@@ -5,21 +5,38 @@ const processVideos = () => {
     console.log(`Encontrados ${videos.length} elementos <video> na página.`);
 
     const videoData = Array.from(videos).map(video => ({
-        url: video.src || video.currentSrc || null, // Inclui fallback para currentSrc
+        url: video.src || video.currentSrc || null,
         title: document.title || "Vídeo sem título"
-    })).filter(video => video.url); // Exclui vídeos sem URL
+    })).filter(video => video.url);
 
     if (videoData.length > 0) {
-        chrome.runtime.sendMessage({ type: "video_found", videos: videoData }, () => {
-            if (chrome.runtime.lastError) {
-                console.error("Erro ao enviar mensagem para o background:", chrome.runtime.lastError.message);
-            } else {
-                console.log("Vídeos enviados para o background:", videoData);
-            }
-        });
+        chrome.runtime.sendMessage({ type: "video_found", videos: videoData });
+        console.log("Vídeos encontrados e enviados:", videoData);
     } else {
         console.log("Nenhum vídeo com URL válido encontrado.");
     }
 };
 
-processVideos();
+// Executa após o carregamento da página
+window.addEventListener("load", () => {
+    console.log("Página totalmente carregada. Buscando vídeos...");
+    processVideos();
+});
+
+// Observa alterações no DOM
+const observeDOM = () => {
+    const observer = new MutationObserver(() => {
+        console.log("Alteração detectada no DOM. Reprocessando vídeos...");
+        processVideos();
+    });
+
+    observer.observe(document.body, {
+        childList: true,
+        subtree: true,
+    });
+
+    console.log("Observador de DOM iniciado.");
+};
+
+// Inicie a observação do DOM
+observeDOM();
